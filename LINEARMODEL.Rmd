@@ -26,6 +26,8 @@ require(knitr)
 ```{r}
 basicNN <- ggplot(dataF,aes(y=SIMS,x=ARM))
 ```
+
+
 ## Now add in scatterplot
 
 ```{r}
@@ -41,15 +43,23 @@ basicNN <- ggplot(dataF,aes(y=SIMS,x=GRIP))
 basicNN + geom_point()+ geom_smooth(method=lm)
 ```
 
+
+
 ```{r}
 model.1 <- lm(SIMS~ARM,data=dataF)
 summary.lm(model.1)
 ```
+
+
 ```{r}
 new <- data.frame(ARM=88,GRIP=94)
                   predict.lm(model.1,new)
 predict(model.1,new,interval="prediction")
 ```
+ Model 1 is predicting a value of 0.763863 and the 95% confidence interval is somewhere in the -1.726209 and 3.138997.
+
+
+
 ```{r}
 model.2 <- lm(SIMS~GRIP,data=dataF)
 summary.lm(model.2)
