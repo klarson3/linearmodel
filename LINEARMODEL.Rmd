@@ -49,7 +49,7 @@ basicNN + geom_point()+ geom_smooth(method=lm)
 model.1 <- lm(SIMS~ARM,data=dataF)
 summary.lm(model.1)
 ```
-
+The adjusted R squared value of model 1 is 0.467. 
 
 ```{r}
 new <- data.frame(ARM=88,GRIP=94)
@@ -64,15 +64,20 @@ predict(model.1,new,interval="prediction")
 model.2 <- lm(SIMS~GRIP,data=dataF)
 summary.lm(model.2)
 ``` 
+The Adjusted R Squared in the model for SIMS ARM has a higher value than SIMS GRIP. That means the model for ARM is better than GRIP. 
+
 ```{r}
 new <- data.frame(ARM=88,GRIP=94)
                   predict.lm(model.2,new)
 predict(model.2,new,interval="prediction")
 ```
+ Model 2 is predicting a value of -0.5361543 and the 95 confidence interval is somewhere in the -3.107961 and 2.035652.
 ```{r}
 model.3 <- lm(SIMS~GRIP+ARM,data=dataF)
 summary.lm(model.3)
 ``` 
+The Adjusted R squared for this model is 0.5358 which is bigger than the adjusted R squared for each model 1 and model 2 which explains more of a variation than either of the other 2 models does, and just by exploring the adjusted R squared if we are to rate the models 2 is the worst one, 1 is the second best and Model 3 is the best model. 
+
 ```{r}
 new <- data.frame(ARM=88,GRIP=94)
                   predict.lm(model.3,new)
@@ -81,3 +86,4 @@ predict(model.3,new,interval="prediction")
 ```{r}
 anova(model.1,model.3)
 ```
+The RSS OF Model 1 is 217.88 and RSS of Model 2 is 188.43 which is about 30 points less than SIMS~ARM. This shows that the result is significant because we are testing whether or not it would change the value of out assessment. The result shows a low P value so we reject the null hypothesis that there isn;t any difference in how well Model 1 explains ARM and how well Model 2 explains ARM. This means that Model 3 is doing a much better job of predicting it and that is why we reject the null hypothesis and therefore conclude that this particular anova test shows that model 3 is the better model. 
